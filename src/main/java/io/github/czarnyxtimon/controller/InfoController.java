@@ -1,5 +1,6 @@
 package io.github.czarnyxtimon.controller;
 
+import io.github.czarnyxtimon.TaskConfigurationProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
@@ -8,10 +9,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 class InfoController {
-    @Autowired
+
     private DataSourceProperties dataSource;
-    @Value("${task.allowMultipleTasksFromTemplate}")
-    private boolean myProp;
+    private TaskConfigurationProperties myProp;
+
+    InfoController(final DataSourceProperties dataSource, final TaskConfigurationProperties myProp) {
+        this.dataSource = dataSource;
+        this.myProp = myProp;
+    }
 
     @GetMapping("/info/url")
     String url() {
@@ -20,6 +25,6 @@ class InfoController {
 
     @GetMapping("/info/prop")
     boolean myProp() {
-        return myProp;
+        return myProp.isAllowMultipleTasksFromTemplate();
     }
 }
