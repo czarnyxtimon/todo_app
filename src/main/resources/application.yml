@@ -7,3 +7,4 @@ spring:
     username: 'sa'
   jpa.hibernate:
     ddl-auto: update
+my.prop: 'test'
