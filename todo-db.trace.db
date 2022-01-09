@@ -1,0 +1,4 @@
+2022-01-09 22:22:04 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "TASKS" nie istnieje
+Table "TASKS" not found; SQL statement:
+insert into tasks (id, description, done) values (null, ?, ?) [42102-200]
