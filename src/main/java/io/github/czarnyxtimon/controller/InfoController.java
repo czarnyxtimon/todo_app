@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 class InfoController {
     @Autowired
     private DataSourceProperties dataSource;
-    @Value("${my.prop}")
-    private String myProp;
+    @Value("${task.allowMultipleTasksFromTemplate}")
+    private boolean myProp;
 
     @GetMapping("/info/url")
     String url() {
@@ -19,7 +19,7 @@ class InfoController {
     }
 
     @GetMapping("/info/prop")
-    String myProp() {
+    boolean myProp() {
         return myProp;
     }
 }
