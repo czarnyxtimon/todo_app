@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -32,6 +33,12 @@ class TaskController {
     ResponseEntity<List<Task>> readAllTasks(Pageable page){
         logger.info("Custom pageable");
         return ResponseEntity.ok(repository.findAll(page).getContent());
+    }
+
+    @PutMapping("/tasks/{id}")
+    ResponseEntity<?> updateTask(@RequestBody @Valid Task toUpdate){
+        repository.save(toUpdate);
+        return ResponseEntity.noContent().build();
     }
 
 }
