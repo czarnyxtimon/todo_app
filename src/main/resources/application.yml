@@ -9,4 +9,4 @@ spring:
     username: 'sa'
   jpa.hibernate:
     ddl-auto: update
-task.allowMultipleTasksFromTemplate: false
+task.template.allowMultipleTasks: false
