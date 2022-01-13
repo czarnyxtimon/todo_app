@@ -2,6 +2,7 @@ package io.github.czarnyxtimon.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -13,6 +14,8 @@ public class Task {
     @NotBlank(message = "Task's description must not be empty")
     private String description;
     private boolean done;
+    @Column()
+    private LocalDateTime deadline;
 
     public Task() {
     }
