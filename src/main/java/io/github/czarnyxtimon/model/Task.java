@@ -43,4 +43,12 @@ public class Task {
     public void setDone(boolean done) {
         this.done = done;
     }
+
+    public LocalDateTime getDeadline() {
+        return deadline;
+    }
+
+    void setDeadline(final LocalDateTime deadline) {
+        this.deadline = deadline;
+    }
 }
