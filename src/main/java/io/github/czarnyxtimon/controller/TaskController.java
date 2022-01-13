@@ -54,8 +54,11 @@ class TaskController {
         if(!repository.existsById(id)){
             return ResponseEntity.notFound().build();
         }
-        toUpdate.setId(id);
-        repository.save(toUpdate);
+        repository.findById(id)
+                .ifPresent(task ->  {
+                    task.setDone(!task.isDone());
+                    repository.save(task);
+                });                                     // wersja bez  @Transactional);
         return ResponseEntity.noContent().build();
     }
 
@@ -66,7 +69,7 @@ class TaskController {
             return ResponseEntity.notFound().build();
         }
         repository.findById(id)
-                .ifPresent(task -> task.setDone(!task.isDone()));
+                .ifPresent(task -> task.setDone(!task.isDone())); //wersja z  @Transactional
         return ResponseEntity.noContent().build();
     }
 }

@@ -26,7 +26,7 @@ public class Task {
         return id;
     }
 
-    public void setId(int id) {
+    void setId(int id) {
         this.id = id;
     }
 
@@ -52,5 +52,21 @@ public class Task {
 
     void setDeadline(final LocalDateTime deadline) {
         this.deadline = deadline;
+    }
+
+    public void updateFrom(final Task source){
+        description = source.description;
+        done = source.done;
+        deadline = source.deadline;
+    }
+
+    @PrePersist
+    void prePersist() {
+        createdOn = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    void preMerge() {
+        updatedOn = LocalDateTime.now();
     }
 }
