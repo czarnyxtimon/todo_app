@@ -16,6 +16,8 @@ public class Task {
     private boolean done;
     @Column()
     private LocalDateTime deadline;
+    private LocalDateTime createdOn;
+    private LocalDateTime updatedOn;
 
     public Task() {
     }
