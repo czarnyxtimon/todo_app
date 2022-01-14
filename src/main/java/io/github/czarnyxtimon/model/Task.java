@@ -17,7 +17,7 @@ public class Task {
     @Column()
     private LocalDateTime deadline;
     @Embedded
-    private Audit audit;
+    private Audit audit = new Audit();
 
     public Task() {
     }
