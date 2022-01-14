@@ -17,6 +17,9 @@ public class Task {
     @Column()
     private LocalDateTime deadline;
     @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(column = @Column(name = "updateOn"), name = "updatedOn")
+    })
     private Audit audit;
 
     public Task() {
