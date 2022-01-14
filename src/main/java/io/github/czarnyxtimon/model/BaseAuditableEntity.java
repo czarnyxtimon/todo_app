@@ -6,7 +6,7 @@ import javax.persistence.PreUpdate;
 import java.time.LocalDateTime;
 
 @MappedSuperclass
-class BaseAuditableEntity {
+abstract class BaseAuditableEntity {
 
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
