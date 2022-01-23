@@ -14,7 +14,6 @@ public class Task {
     @NotBlank(message = "Task's description must not be empty")
     private String description;
     private boolean done;
-    @Column()
     private LocalDateTime deadline;
     @Embedded
     private Audit audit = new Audit();
@@ -22,7 +21,12 @@ public class Task {
     @JoinColumn(name = "task_group_id")
     private TaskGroup group;
 
-    public Task() {
+    Task() {
+    }
+
+    public Task(String description, LocalDateTime deadline){
+        this.description = description;
+        this.deadline = deadline;
     }
 
     public int getId() {
