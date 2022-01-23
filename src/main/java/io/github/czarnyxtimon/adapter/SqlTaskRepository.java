@@ -1,5 +1,7 @@
-package io.github.czarnyxtimon.model;
+package io.github.czarnyxtimon.adapter;
 
+import io.github.czarnyxtimon.model.Task;
+import io.github.czarnyxtimon.model.TaskRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
