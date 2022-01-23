@@ -6,12 +6,16 @@ import io.github.czarnyxtimon.model.TaskGroupRepository;
 import io.github.czarnyxtimon.model.TaskRepository;
 import io.github.czarnyxtimon.model.projection.GroupReadModel;
 import io.github.czarnyxtimon.model.projection.GroupWriteModel;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.annotation.RequestScope;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequestScope
 public class TaskGroupService {
     private TaskGroupRepository repository;
     private TaskRepository taskRepository;
@@ -21,7 +25,7 @@ public class TaskGroupService {
         this.taskRepository = taskRepository;
     }
 
-    public GroupReadModel createGroup(GroupWriteModel source) {
+    public GroupReadModel createGroup(final GroupWriteModel source) {
         TaskGroup result = repository.save(source.toGroup());
         return new GroupReadModel(result);
     }
