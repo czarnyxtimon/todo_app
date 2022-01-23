@@ -35,7 +35,7 @@ public class TaskGroup {
         return description;
     }
 
-    void setDescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
@@ -47,11 +47,11 @@ public class TaskGroup {
         this.done = done;
     }
 
-     public Set<Task> getTasks() {
+    public Set<Task> getTasks() {
         return tasks;
     }
 
-    void setTasks(final Set<Task> tasks) {
+    public void setTasks(final Set<Task> tasks) {
         this.tasks = tasks;
     }
 
