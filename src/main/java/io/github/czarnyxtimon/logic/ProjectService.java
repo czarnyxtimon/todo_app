@@ -44,7 +44,7 @@ public class ProjectService {
                                     .collect(Collectors.toSet())
                                 );
                     return targetGroup;
-                }).orElseThrow(() -> new IllegalArgumentException("Project with given group not found"));
+                }).orElseThrow(() -> new IllegalArgumentException("Project with given id not found"));
         return new GroupReadModel(result);
     }
 }

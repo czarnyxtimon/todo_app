@@ -1,6 +1,7 @@
 package io.github.czarnyxtimon.logic;
 
 import io.github.czarnyxtimon.TaskConfigurationProperties;
+import io.github.czarnyxtimon.model.ProjectRepository;
 import io.github.czarnyxtimon.model.TaskGroup;
 import io.github.czarnyxtimon.model.TaskGroupRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -25,11 +26,7 @@ class ProjectServiceTest {
         var mockGroupRepository = mock(TaskGroupRepository.class);
         when(mockGroupRepository.existsByDoneIsFalseAndProject_Id(anyInt())).thenReturn(true);
         // and
-        var mockTemplate = mock(TaskConfigurationProperties.Template.class);
-        // and
-        when(mockTemplate.isAllowMultipleTasks()).thenReturn(false);
-        var mockConfig = mock(TaskConfigurationProperties.class);
-        when(mockConfig.getTemplate()).thenReturn(mockTemplate);
+        TaskConfigurationProperties mockConfig = configurationReturning(false);
         // system under test
         var toTest = new ProjectService(null,mockGroupRepository,mockConfig);
 
@@ -41,5 +38,34 @@ class ProjectServiceTest {
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessageContaining("one undone group");
 
+    }
+
+    @Test
+    @DisplayName("should throw IllegalStateException when configuration ok and no projects for given id")
+    void createGroup_noMultipleGroupsConfig_And_noProjects_throwsIllegalArgumentException() {
+        // given
+        var mockRepository = mock(ProjectRepository.class);
+        when(mockRepository.findById(anyInt())).thenReturn(Optional.empty());
+        // and
+        TaskConfigurationProperties mockConfig = configurationReturning(true);
+        // system under test
+        var toTest = new ProjectService(mockRepository,null,mockConfig);
+
+        // when
+        var exception = catchThrowable(() -> toTest.createGroup(LocalDateTime.now(), 0));
+
+        // then
+        assertThat(exception)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("id not found");
+
+    }
+
+    private TaskConfigurationProperties configurationReturning(final boolean result) {
+        var mockTemplate = mock(TaskConfigurationProperties.Template.class);
+        when(mockTemplate.isAllowMultipleTasks()).thenReturn(result);
+        var mockConfig = mock(TaskConfigurationProperties.class);
+        when(mockConfig.getTemplate()).thenReturn(mockTemplate);
+        return mockConfig;
     }
 }
