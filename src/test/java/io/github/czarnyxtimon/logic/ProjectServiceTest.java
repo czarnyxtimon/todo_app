@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
@@ -31,9 +32,14 @@ class ProjectServiceTest {
         when(mockConfig.getTemplate()).thenReturn(mockTemplate);
         // system under test
         var toTest = new ProjectService(null,mockGroupRepository,mockConfig);
+
         // when
-        toTest.createGroup(LocalDateTime.now(), 0);
+        var exception = catchThrowable(() -> toTest.createGroup(LocalDateTime.now(), 0));
 
         // then
+        assertThat(exception)
+                .isInstanceOf(IllegalStateException.class)
+                .hasMessageContaining("one undone group");
+
     }
 }
