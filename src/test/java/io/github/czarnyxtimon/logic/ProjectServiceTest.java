@@ -77,6 +77,16 @@ class ProjectServiceTest {
         assertThat(exception)
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("id not found");
+    }
+
+    @Test
+    @DisplayName("should create a new group from project")
+    void createGroup_configurationOk_existingProject_createAndSavesGroup() {
+        // given
+        var mockRepository = mock(ProjectRepository.class);
+        when(mockRepository.findById(anyInt())).thenReturn(Optional.empty());
+        // and
+        TaskConfigurationProperties mockConfig = configurationReturning(true);
 
     }
 
