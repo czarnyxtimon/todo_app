@@ -3,13 +3,11 @@ package io.github.czarnyxtimon.logic;
 import io.github.czarnyxtimon.TaskConfigurationProperties;
 import io.github.czarnyxtimon.model.*;
 import io.github.czarnyxtimon.model.projection.GroupReadModel;
-import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
 public class ProjectService {
     private ProjectRepository repository;
     private TaskGroupRepository taskGroupRepository;
